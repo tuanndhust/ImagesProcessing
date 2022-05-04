@@ -1,26 +1,46 @@
-import cv2
+import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
-#gan anh
-fn='/home/tuannghust/ImagesProcessing/ImagesProcessing/Lena.png'
-img=cv2.imread(fn)
-# cv2.imshow('anh vua nhap',img)
-# cv2.waitKey(0)
+#img = cv.imread('/home/tuannghust/ImagesProcessing/ImagesProcessing/Lena.png',0)
+def Histogram(img,bin):
+    bin1 = np.arange(bin+1)
+    #print(bin1)
+    imgs = cv.imread(img)
+    #print(imgs)
+    print(imgs.shape)
+    print(imgs[10])
+    dims = imgs.ndim
+    print(dims)
+    if dims == 1:
+        imgss = imgs.flatten()
+    #print(type(img))
+    # for i in range(bin+1):
+    #     bin1.append(i)
+        fig,ax = plt.subplots(1,1)
+        ax.hist(imgss,bins=bin1)
+        ax.set_title('Histogram of input image')
+    elif dims == 3:
+        #blue channel
+        b = imgs[0]
+        bs = b.flatten()
+        # print(bs)
+        # print(bs.shape)
+        fig, (ax, ax1, ax2) = plt.subplots(1,3)
+        ax.hist(bs,bins=bin1)
+        ax.set_title('blue')  
+        #grown channel
+        g = imgs[1]
+        gs = g.flatten() 
+        ax1.hist(gs,bins=bin1)
+        ax1.set_title('grown')
+        # print(gs)
+        # print(gs.shape)
+        #red channel
+        r = imgs[2]
+        rs = r.flatten() 
+        ax2.hist(rs,bins=bin1)
+        ax2.set_title('red')    
+    #plt.show()    
 
-img_gray =cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-
-#tinh histogram
-
-hist=np.zeros((256,))
-h,w=img_gray.shape[:2]
-print ("kich thuoc anh w=",w,",h=",h)
-
-for i in range(h):
-    for j in range(w):    
-        hist[img_gray[i][j]] +=1
-
-#hien thi histogram
-fig = plt.figure()
-plt.plot(hist)
-plt.show()
+Histogram('/home/tuanhust/ImagesProcessing/Lena.png',255)
