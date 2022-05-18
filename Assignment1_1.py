@@ -9,7 +9,5 @@ cv.imshow('Lena',img)
 img[:,:,0] = 0
 cv.imwrite('Lena_blue.png', img)
 
-
-
 cv.waitKey(0)
 cv.destroyAllWindows()
