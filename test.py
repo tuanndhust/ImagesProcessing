@@ -8,10 +8,10 @@ def Histogram(img,bin):
     #print(bin1)
     imgs = cv.imread(img)
     #print(imgs)
-    print(imgs.shape)
-    print(imgs[10])
+    #print(imgs.shape)
+    print(imgs[:,:,2])
     dims = imgs.ndim
-    print(dims)
+    #print(dims)
     if dims == 1:
         imgss = imgs.flatten()
     #print(type(img))
@@ -22,7 +22,7 @@ def Histogram(img,bin):
         ax.set_title('Histogram of input image')
     elif dims == 3:
         #blue channel
-        b = imgs[0]
+        b = imgs[:,:,0]
         bs = b.flatten()
         # print(bs)
         # print(bs.shape)
@@ -30,17 +30,17 @@ def Histogram(img,bin):
         ax.hist(bs,bins=bin1)
         ax.set_title('blue')  
         #grown channel
-        g = imgs[1]
+        g = imgs[:,:,1]
         gs = g.flatten() 
         ax1.hist(gs,bins=bin1)
         ax1.set_title('grown')
         # print(gs)
         # print(gs.shape)
         #red channel
-        r = imgs[2]
+        r = imgs[:,:,2]
         rs = r.flatten() 
         ax2.hist(rs,bins=bin1)
         ax2.set_title('red')    
-    #plt.show()    
+    plt.show()    
 
-Histogram('/home/tuanhust/ImagesProcessing/Lena.png',255)
+Histogram('/home/tuannghust/ImagesProcessing/ImagesProcessing/Lena.png',255)
