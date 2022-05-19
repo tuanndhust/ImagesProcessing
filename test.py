@@ -16,6 +16,7 @@ def str2arr(str):
 with open(ego) as f:
     read_pose = [s.strip() for s in f.readlines()]
     num_pose = len(read_pose)
+ego.close()
 # ar = str2arr(read_pose[1]) 
 # ar2 =  str2arr(read_pose[1-1])
 # print(ar.dot(ar2))
