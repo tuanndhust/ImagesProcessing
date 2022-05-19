@@ -11,18 +11,19 @@ def str2arr(str):
     arr = arr.reshape([3,4])
     arr1 = np.array([[0,0,0,1]])
     arr = np.concatenate((arr,arr1))
-    #print(arr)
     return arr
+def arr2str(arr):
+    arr = arr[:3].flatten()
+    arrtolist = arr.tolist()
+    arrtostr = ' '.join(str(e) for e in arrtolist)
+    return arrtostr
 with open(ego) as f:
     read_pose = [s.strip() for s in f.readlines()]
     num_pose = len(read_pose)
-ego.close()
-# ar = str2arr(read_pose[1]) 
-# ar2 =  str2arr(read_pose[1-1])
-# print(ar.dot(ar2))
-# print(ar)
-# print(ar2.shape)
-for i in range(1,num_pose):
-    read_pose[i] = str2arr(read_pose[i]) @ str2arr(read_pose(i-1))
-    
-print(read_pose)
+odometry = []
+# odometry[0] = arr2str(read_pose[0])
+for i in range(num_pose):
+    odometry.append(str2arr(read_pose[i]))    
+for i in range(1,len(odometry)):
+    odometry[i] = odometry[i]@odometry[i-1]
+print(odometry)
