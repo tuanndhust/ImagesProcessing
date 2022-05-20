@@ -1,12 +1,12 @@
 import numpy as np
 #path to pose.txt file
-ego = '/home/tuannghust/ego2odo.txt'
+ego = '/home/tuanhust/ego.txt'
 #path to converted file
-odo = '/home/tuannghust/odo/txt'
+odo = '/home/tuanhust/odo.txt'
 #from list string to transformation matrix (4x4)
 def str2arr(str):
     arr = str.split(" ")
-    arr = list(map(int, arr))
+    arr = list(map(float, arr))
     arr = np.array(arr)
     arr = arr.reshape([3,4])
     arr1 = np.array([[0,0,0,1]])
@@ -26,4 +26,11 @@ for i in range(num_pose):
     odometry.append(str2arr(read_pose[i]))    
 for i in range(1,len(odometry)):
     odometry[i] = odometry[i]@odometry[i-1]
-print(odometry)
+
+for i in range(len(odometry)):
+    odometry[i] = arr2str(odometry[i])
+    #odo.write(odometry[i])
+odo = open(odo,'w')
+with odo as f:
+    f.write('\n'.join(odometry))
+odo.close()
